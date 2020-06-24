@@ -19,7 +19,7 @@ def copyFile(file):
         else : 
             raise ValueError("The folder destination should be filled")
     else : 
-        raise AttributeError("The folder source doesn't exist :", folderDestination)
+        raise AttributeError("The folder destination doesn't exist :", folderDestination)
 
 def getFiles():
     if folderSource.exists() :
