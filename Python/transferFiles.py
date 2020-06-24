@@ -13,21 +13,26 @@ folderDestination = pathlib.Path(r'C:\Users\utilisateur\Documents\Destination')
 
 
 def copyFile(file):
-    if folderDestination != None : 
-        shutil.copy2(file, folderDestination)
+    if folderDestination.exists() :
+        if folderDestination != None : 
+            shutil.copy2(file, folderDestination)
+        else : 
+            raise ValueError("The folder destination should be filled")
     else : 
-        raise ValueError("The folder destination should be filled")
+        raise AttributeError("The folder source doesn't exist :", folderDestination)
 
 def getFiles():
-    if folderSource != None:
-        files = pathlib.Path(folderSource).glob("*.docx")
-        for file in files:
-            modificationDate = os.path.getctime(file)
-            if modificationDate > startDate and modificationDate < endDate :
-                copyFile(file)
-
+    if folderSource.exists() :
+        if folderSource != None:
+            files = pathlib.Path(folderSource).glob("*.docx")
+            for file in files:
+                modificationDate = os.path.getctime(file)
+                if modificationDate > startDate and modificationDate < endDate :
+                    copyFile(file)
+        else : 
+            raise ValueError("The folder source should be filled")
     else : 
-        raise ValueError("The folder source should be filled")
+        raise AttributeError("The folder source doesn't exist :", folderSource)
 
 
 def main():
