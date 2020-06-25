@@ -5,32 +5,32 @@ import pathlib
 import shutil
 
 # We want files where the modification of each file is between startDate and endDate
-startDate = dt.datetime(2019, 6, 1).timestamp()
-endDate = dt.datetime.now().timestamp()
+start_date = dt.datetime(2019, 6, 1).timestamp()
+end_date = dt.datetime.now().timestamp()
 
-folderSource = pathlib.Path(r'C:\Users\utilisateur\Documents\Source')
-folderDestination = pathlib.Path(r'C:\Users\utilisateur\Documents\Destination')
+folder_source = pathlib.Path(r'C:\Users\utilisateur\Documents\Source')
+folder_destination = pathlib.Path(r'C:\Users\utilisateur\Documents\Destination')
 
 
-def copyFile(file):
-    if folderDestination.exists() :
-        shutil.copy2(file, folderDestination)
+def copy_file(file):
+    if folder_destination.exists() :
+        shutil.copy2(file, folder_destination)
     else : 
-        raise AttributeError("The folder destination doesn't exist :", folderDestination)
+        raise AttributeError("The folder destination doesn't exist :", folder_destination)
 
-def getFiles():
-    if folderSource.exists() :
-        files = pathlib.Path(folderSource).glob("*.docx")
+def get_files():
+    if folder_source.exists() :
+        files = pathlib.Path(folder_source).glob("*.docx")
         for file in files:
-            modificationDate = os.path.getctime(file)
-            if modificationDate > startDate and modificationDate < endDate :
-                copyFile(file)
+            modification_date = os.path.getctime(file)
+            if modification_date > start_date and modification_date < end_date :
+                copy_file(file)
     else : 
-        raise AttributeError("The folder source doesn't exist :", folderSource)
+        raise AttributeError("The folder source doesn't exist :", folder_source)
 
 
 def main():
-    getFiles()
+    get_files()
 
 if __name__ == "__main__":
     main()

@@ -5,29 +5,30 @@ import json
 import webbrowser
 from pathlib import PureWindowsPath
 
-folderName = "eseo"
+folder_name = "eseo"
 urls = []
 
-def getChromeBookmarks():
+def get_chrome_bookmarks():
     # Working with Windows 10
-    LocalAppDataPath = PureWindowsPath(os.getenv("LOCALAPPDATA"))
-    ChromeBookmarksPath = LocalAppDataPath / 'Google' / 'Chrome' / 'User Data' / 'Default' / 'Bookmarks.bak'
+    local_app_data_path = PureWindowsPath(os.getenv("LOCALAPPDATA"))
+    chrome_bookmarks_path = local_app_data_path / 'Google' / 'Chrome' / 'User Data' / 'Default' / 'Bookmarks'
 
-    with open(ChromeBookmarksPath, encoding="utf8") as f:
+    with open(chrome_bookmarks_path, encoding="utf8") as f:
         data = json.load(f)
 
     for children in data["roots"]["bookmark_bar"]["children"] :
         try:
-            if children["name"] == folderName :
+            if children["name"] == folder_name :
                 for bookmark in children["children"] :
                     urls.append(bookmark["url"])
         except:
             pass
+            
 
-def openUrls():
+def open_urls():
     for url in urls :
         webbrowser.open(url)
 
 if __name__ == "__main__":
-    getChromeBookmarks()
-    openUrls()
+    get_chrome_bookmarks()
+    open_urls()
