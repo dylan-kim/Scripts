@@ -29,6 +29,12 @@ file_name = "Rapport TP"
 def create_report():
     document = Document()
 
+    # Metadata
+    # By default the author and comments are set to 'python-docx'
+    core_properties = document.core_properties
+    core_properties.author = name
+    core_properties.comments = ("")
+
     # Header
     section = document.sections[0]
     header = section.header
@@ -61,7 +67,7 @@ def main():
 
     # Move the document to the desktop
     folder_destination = pathlib.Path(r'C:\Users\utilisateur\Desktop')
-    shutil.copy2(file_name + ".docx", folder_destination)
+    shutil.move(file_name + ".docx", folder_destination)
 
     os.startfile(r'C:\Users\utilisateur\Desktop' + file_name + '.docx')
 
