@@ -3,6 +3,7 @@
 # Python 3.7
 # python-docx 0.8.10
 
+import os
 import datetime
 import locale
 import pathlib
@@ -33,7 +34,7 @@ def create_report():
     header = section.header
     paragraph  = header.paragraphs[0]
     month_year = date.strftime("%B").upper() + " " + str(date.year)
-    paragraph.text = name + " " + engineer_year + " " + option + "\t\t" + month_year
+    paragraph.text = name + " " + engineer_year + " " + option + "\t\t" + month_year # \t is a separator between left/center/right
     paragraph.style = document.styles["Header"]
 
     # Title
@@ -62,5 +63,7 @@ def main():
     folder_destination = pathlib.Path(r'C:\Users\utilisateur\Desktop')
     shutil.copy2(file_name + ".docx", folder_destination)
 
-if __name__ == "__main__":
+    os.startfile(r'C:\Users\utilisateur\Desktop' + file_name + '.docx')
+
+if __name__ == "__main__": 
     main()
